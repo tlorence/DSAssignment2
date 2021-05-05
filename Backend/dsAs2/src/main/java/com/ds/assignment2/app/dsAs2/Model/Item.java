@@ -1,6 +1,5 @@
 package com.ds.assignment2.app.dsAs2.Model;
 
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,14 +10,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @ToString
 
-@Document(collection = "User")
-public class User {
+@Document(collection = "Item")
+public class Item {
     @Id
-    private int nicNo;
-    private String firstName;
-    private String lastName;
-    private int age;
-    private String username;
-    private String password;
-
+    private int itemID;
+    private String itemName;
+    private String itemDescription;
+    private String itemCategory;
+    private String sellerName;
+    private Float price;
 }

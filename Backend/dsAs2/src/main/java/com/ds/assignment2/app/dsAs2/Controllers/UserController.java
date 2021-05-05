@@ -1,7 +1,6 @@
 package com.ds.assignment2.app.dsAs2.Controllers;
 
 
-
 import com.ds.assignment2.app.dsAs2.Model.User;
 import com.ds.assignment2.app.dsAs2.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping(value = "/addUser")
-    public String saveUser(@RequestBody User user){
+    public String saveUser(@RequestBody User user) {
 
         userRepository.save(user);
         return "Added User successfully. NIC number is: " + user.getNicNo();
