@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ItemController {
@@ -21,7 +22,14 @@ public class ItemController {
 
     @GetMapping("/findAllItems")
     public List<Item> getItems() {
+
         return repository.findAll();
+    }
+
+    @GetMapping("/findAllItems/{id}")
+    public Optional<Item> getItems(@PathVariable int id) {
+
+        return repository.findById(id);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -29,4 +37,5 @@ public class ItemController {
         repository.deleteById(id);
         return "Item" + id + " Deleted Successfully";
     }
+
 }
