@@ -7,6 +7,9 @@ import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 @Getter
 @Setter
 @ToString
@@ -14,11 +17,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "User")
 public class User {
     @Id
-    private int nicNo;
+    private String email;
     private String firstName;
     private String lastName;
-    private int age;
-    private String username;
     private String password;
+    private String userType;
 
 }

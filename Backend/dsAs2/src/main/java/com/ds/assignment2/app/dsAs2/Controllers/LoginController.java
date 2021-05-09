@@ -20,10 +20,6 @@ public class LoginController {
     @Autowired
     private UserRepository repository;
 
-    @PostMapping("/login")
-    public String loginValidate(@RequestBody String username, String password) {
 
-
-    }
 
 }

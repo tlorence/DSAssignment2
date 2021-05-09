@@ -32,6 +32,12 @@ public class ItemController {
         return repository.findById(id);
     }
 
+    @PutMapping("/update")
+    public String updateItem(@RequestBody Item item) {
+        repository.save(item);
+        return "Update Successfully";
+    }
+
     @DeleteMapping("/delete/{id}")
     public String deleteItem(@PathVariable int id) {
         repository.deleteById(id);

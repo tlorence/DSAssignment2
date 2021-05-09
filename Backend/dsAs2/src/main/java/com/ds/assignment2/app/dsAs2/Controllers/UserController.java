@@ -19,7 +19,7 @@ public class UserController {
     public String saveUser(@RequestBody User user) {
 
         userRepository.save(user);
-        return "Added User successfully. NIC number is: " + user.getNicNo();
+        return "Added User successfully. NIC number is: " + user.getEmail();
     }
 
 }
