@@ -1,52 +1,61 @@
-import React, { Component,useState } from "react";
+import React, { Component } from "react";
 import "./items.css";
 import img from "./login.jpg";
+import Swal from "sweetalert2";
 
 export default class Items extends Component {
   constructor(props) {
     super(props);
-    this.state = {      
+    this.state = {
       error: null,
       isLoaded: false,
       items: [],
-      setCart:0
+      cartItems: [],
     };
   }
 
-
-  addItem = (item) => {
-    // let [cart, setCart] = useState([])
-    let cart = localStorage.getItem("cart");
-    //create a copy of our cart state, avoid overwritting existing state
-    let cartCopy = cart;
-    
-    //assuming we have an ID field in our item
-    let itemadd = item;
-    console.log(cartCopy);
-    
-    //look for item in cart array
-    const exist = cartCopy.find((x) => x.itemID === itemadd.itemID);
-    
-    //if item already exists
-    if (exist) {
-      this.state.setCart(
-        cartCopy.map((x) =>
-          x.itemID === itemadd.itemID ? { ...exist, qty: exist.qty + 1 } : x
-        )
-      );
-    } else {
-      this.state.setCart([...itemadd, { ...itemadd, qty: 1 }]);
+  onAdd = (product) => {
+    // this.state.cartItems = { localcart };
+    let isnew = true;
+    this.state.cartItems.map((x) => {
+      if (x.itemID === product.itemID) {
+        x.qty = x.qty + 1;
+        isnew = false;
+      }
+    });
+    if (isnew) {
+      product.qty = 1;
+      this.state.cartItems.push(product);
     }
-    
-    //update app state
-    this.state.setCart(cartCopy)
-    
-    //make cart a string and store in local space
-    // let stringCart = JSON.stringify(cartCopy);
-    // localStorage.setItem("cart", stringCart)
-    
-  }
+    // console.log(this.state.cartItems);
+    let newcart = this.state.cartItems;
+    this.setState({
+      cartItems: newcart,
+    });
+    let stringCart = JSON.stringify(this.state.cartItems);
+    localStorage.setItem("cart", stringCart);
+  };
+  onRemove = (product) => {
+    this.state.cartItems.map((x) => {
+      if (x.itemID === product.itemID) {
+        if (x.qty > 1) {
+          x.qty = x.qty - 1;
+        } else {
+          const index = this.state.cartItems.indexOf(product);
+          if (index > -1) {
+            this.state.cartItems.splice(index, 1);
+          }
+        }
+      }
+      let newcart = this.state.cartItems;
+      this.setState({
+        cartItems: newcart,
+      });
+    });
 
+    let stringCart = JSON.stringify(this.state.cartItems);
+    localStorage.setItem("cart", stringCart);
+  };
 
   componentDidMount() {
     fetch("http://localhost:9911/item/findAllItems", {
@@ -70,18 +79,37 @@ export default class Items extends Component {
           });
         }
       );
+
+    let localcart = localStorage.getItem("cart");
+    localcart = JSON.parse(localcart);
+    if (localcart) {
+      this.state.cartItems = localcart;
+    }
   }
 
   render() {
-    const { error, isLoaded, items } = this.state;
+    const { error, isLoaded, items, cartItems } = this.state;
+    const itemsPrice = this.state.cartItems.reduce(
+      (a, c) => a + c.qty * c.price,
+      0
+    );
+    //   const taxPrice = itemsPrice * 0.14;
+    // const shippingPrice = itemsPrice > 2000 ? 0 : 20;
+    const totalPrice = itemsPrice;
+
+    // const itemsPrice = 0;
+    // //   const taxPrice = itemsPrice * 0.14;
+    // const shippingPrice = 0;
+    // const totalPrice = itemsPrice + shippingPrice;
+
     return (
       <div>
         <div className="col-md-9 col-lg-9">
           <section id="team" class="team">
             <div class="container" data-aos="fade-up">
-              <h1 className="text-center mb-5">Product List</h1>
+              {/* <h1 className="text-center mb-5">Product List</h1> */}
 
-              <div class="row gy-4 ps-5">
+              <div class="row gy-4">
                 {items.map((item) => (
                   <div
                     class="col-lg-4 col-md-4 d-flex align-items-stretch"
@@ -102,7 +130,11 @@ export default class Items extends Component {
                           <p class="text-justify">seller : {item.sellerName}</p>
                         </div>
                         <div class="">
-                          <button class="team-btn" data-id="1" onClick={()=>this.addItem(item)}>
+                          <button
+                            class="team-btn"
+                            data-id="1"
+                            onClick={() => this.onAdd(item)}
+                          >
                             Add to cart
                           </button>
                         </div>
@@ -115,7 +147,94 @@ export default class Items extends Component {
           </section>
         </div>
         <div className="col-md-3 col-lg-3">
-          <div className="sidenav"></div>
+          <div className="sidenav">
+            <h2 className="m-2">Cart Items</h2>
+            <div className="m-2">
+              {cartItems.length === 0 && <div>Cart is empty</div>}
+              {cartItems.map((item) => (
+                <div key={item.id} className="row mb-1">
+                  <div className="col-4">{item.itemName}</div>
+                  <div className="col-3">
+                    <button
+                      onClick={() => this.onRemove(item)}
+                      className="remove"
+                    >
+                      -
+                    </button>{" "}
+                    <button onClick={() => this.onAdd(item)} className="add">
+                      +
+                    </button>
+                  </div>
+
+                  <div className="col-5 text-right">
+                    {item.qty} x Rs.{item.price.toFixed(2)}
+                  </div>
+                </div>
+              ))}
+
+              {cartItems !== 0 && (
+                <>
+                  <hr></hr>
+                  <div className="row">
+                    <div className="col-6">Items Price</div>
+                    <div className="col-1 text-right">
+                      Rs.{itemsPrice.toFixed(2)}
+                    </div>
+                  </div>
+                  {/* <div className="row">
+                  <div className="col-6">Tax Price</div>
+                  <div className="col-1 text-right">Rs.{taxPrice.toFixed(2)}</div>
+                </div> */}
+                  {/* <div className="row">
+                    <div className="col-6">Shipping Price</div>
+                    <div className="col-1 text-right">
+                      Rs.{shippingPrice.toFixed(2)}
+                    </div>
+                  </div> */}
+
+                  <div className="row">
+                    <div className="col-6">
+                      <strong>Total Price</strong>
+                    </div>
+                    <div className="col-1 text-right">
+                      <strong>Rs.{totalPrice.toFixed(2)}</strong>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="text-center">
+                    <button
+                      onClick={() =>
+                        Swal.fire({
+                          title: "Do you want to deliver products ?",
+                          width: 600,
+                          height: 600,
+                          padding: "3em",
+                          showDenyButton: true,
+                          showCancelButton: true,
+
+                          confirmButtonText: `Deliver`,
+                          denyButtonText: `Don't Deliver`,
+                        }).then((result) => {
+                          /* Read more about isConfirmed, isDenied below */
+                          if (result.isConfirmed) {
+                            // const shippingPrice = itemsPrice > 2000 ? 0 : 150;
+                            //  totalPrice =await (itemsPrice + shippingPrice);
+                            // console.log(totalPrice);
+                            window.location = "/";
+                          } else if (result.isDenied) {
+                            Swal.fire("Changes are not saved", "", "info");
+                          }
+                        })
+                      }
+                      className="checkout-btn"
+                    >
+                      Checkout
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     );
