@@ -14,7 +14,6 @@ class Login extends React.Component {
 
   //user registration
   state = {
-    
     firstName: "",
     lastName: "",
     age: "",
@@ -40,9 +39,18 @@ class Login extends React.Component {
         password: this.state.password,
       }),
     })
+      .then(
+        this.setState({
+          firstName: "",
+          lastName: "",
+          age: "",
+          email: "",
+          password: "",
+        })
+      )
       .then((res) => res.json())
       .catch((err) => console.log(err));
-      // header("Location:")
+    // header("Location:")
   };
 
   //user login
@@ -65,7 +73,7 @@ class Login extends React.Component {
 
           this.props.history.push("/DashBoard");
         } else {
-          alert("Please Enter Correct Password");
+          // alert("Please Enter Correct Password");
         }
       })
       .catch((err) => console.log(err));
@@ -91,7 +99,7 @@ class Login extends React.Component {
               </div>
               <span>or use your email for registration</span>
               <input
-              className="input-login"
+                className="input-login"
                 type="text"
                 name="firstName"
                 placeholder="First Name"
@@ -101,7 +109,7 @@ class Login extends React.Component {
                 }
               />
               <input
-              className="input-login"
+                className="input-login"
                 type="text"
                 name="lastName"
                 placeholder="Last Name"
@@ -109,7 +117,7 @@ class Login extends React.Component {
                 value={this.state.lastName === null ? "" : this.state.lastName}
               />
               <input
-              className="input-login"
+                className="input-login"
                 type="number"
                 name="age"
                 placeholder="Age"
@@ -117,7 +125,7 @@ class Login extends React.Component {
                 value={this.state.age === null ? "" : this.state.age}
               />
               <input
-              className="input-login"
+                className="input-login"
                 type="email"
                 name="email"
                 placeholder="Email"
@@ -125,19 +133,21 @@ class Login extends React.Component {
                 value={this.state.email === null ? "" : this.state.email}
               />
               <input
-              className="input-login"
+                className="input-login"
                 type="password"
                 name="password"
                 placeholder="Password"
                 onChange={this.onChange}
                 value={this.state.password === null ? "" : this.state.password}
               />
-              <button className="button-login" type="submit">Sign Up</button>
+              <button className="button-signup" type="submit">
+                Sign Up
+              </button>
             </form>
           </div>
 
           <div class="form-container-login sign-in-container-login">
-            <form className="form-login"  onSubmit={this.submitLogin}>
+            <form className="form-login" onSubmit={this.submitLogin}>
               <h2>Sign in</h2>
               <div class="social-container-login">
                 <a href="#" class="social">
@@ -152,7 +162,7 @@ class Login extends React.Component {
               </div>
               <span>or use your account</span>
               <input
-              className="input-login"
+                className="input-login"
                 type="email"
                 name="email"
                 placeholder="Email"
@@ -160,7 +170,7 @@ class Login extends React.Component {
                 value={this.state.email === null ? "" : this.state.email}
               />
               <input
-              className="input-login"
+                className="input-login"
                 type="password"
                 name="password"
                 placeholder="Password"
@@ -168,7 +178,9 @@ class Login extends React.Component {
                 value={this.state.password === null ? "" : this.state.password}
               />
               <a href="#">Forgot your password?</a>
-              <button className="button-login" type="submit">Sign In</button>
+              <button className="button-login button-signup" type="submit">
+                Sign In
+              </button>
             </form>
           </div>
           <div class="overlay-container-login">
@@ -178,14 +190,14 @@ class Login extends React.Component {
                 <p>
                   To keep connected with us please login with your personal info
                 </p>
-                <button class="ghost" id="signIn">
+                <button class="ghost button-signup" id="signIn">
                   Sign In
                 </button>
               </div>
               <div class="overlay-panel overlay-right">
                 <h1>Hello, Friend!</h1>
                 <p>Enter your personal details and start journey with us</p>
-                <button class="ghost" id="signUp">
+                <button class="ghost button-signup" id="signUp">
                   Sign Up
                 </button>
               </div>
