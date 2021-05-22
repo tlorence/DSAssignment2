@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e1f1dae-8a8a-42eb-881f-5b75ed844526" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/DSAssignment2.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/dsAs2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/dsAs2/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/dsAs2/src/main/java/com/ds/assignment2/app/dsAs2/Controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/dsAs2/src/main/java/com/ds/assignment2/app/dsAs2/Controllers/LoginController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +40,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Desktop Old 15.04.2021/PROJECT/janus/Releases/SourceCode/Service/ihub-janus-data" />
   </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
