@@ -58,7 +58,7 @@ export default class Items extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:9911/item/findAllItems", {
+    fetch("http://localhost:9900/items/findAllItems", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

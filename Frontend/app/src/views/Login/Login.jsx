@@ -1,5 +1,6 @@
 import React from "react";
 import "./login.css";
+import Swal from "sweetalert2";
 
 class Login extends React.Component {
   // constructor(props){
@@ -19,6 +20,7 @@ class Login extends React.Component {
     age: "",
     email: "",
     password: "",
+    role: "",
   };
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -26,7 +28,7 @@ class Login extends React.Component {
 
   submitNew = (e) => {
     e.preventDefault();
-    fetch("http://localhost:9911/user/addUser", {
+    fetch("http://localhost:9900/user/addUser", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -37,6 +39,7 @@ class Login extends React.Component {
         age: this.state.age,
         email: this.state.email,
         password: this.state.password,
+        userType: this.state.role,
       }),
     })
       .then(
@@ -62,17 +65,34 @@ class Login extends React.Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: "Elakiri@gmail.com",
-        password: "Passw0rd"
+        email: this.state.email,
+        password: this.state.password,
       }),
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
-
         if (res) {
+          
+          localStorage.setItem("user", JSON.stringify(res));
+          if (res.role === "seller") {
+            // console.log(res);
+            window.location = "/addItems";
+          } else if (res.role === "buyer") {
+            // console.log(res);
+            window.location = "/store";
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Incorrect email or password",
+              text: "Please try again!",
+            });
+          }
         } else {
-          alert("Please Enter Correct Password");
+          Swal.fire({
+            icon: "error",
+            title: "Incorrect email or password",
+            text: "Please try again!",
+          });
         }
       })
       .catch((err) => console.log(err));
@@ -115,14 +135,24 @@ class Login extends React.Component {
                 onChange={this.onChange}
                 value={this.state.lastName === null ? "" : this.state.lastName}
               />
-              <input
+              {/* <input
                 className="input-login"
                 type="number"
                 name="age"
                 placeholder="Age"
                 onChange={this.onChange}
                 value={this.state.age === null ? "" : this.state.age}
-              />
+              /> */}
+              <select
+                name="role"
+                className="input-login"
+                onChange={this.onChange}
+                value={this.state.role === null ? "" : this.state.role}
+              >
+                <option value="">-Select user type-</option>
+                <option value="seller">Seller</option>
+                <option value="buyer">Buyer</option>
+              </select>
               <input
                 className="input-login"
                 type="email"

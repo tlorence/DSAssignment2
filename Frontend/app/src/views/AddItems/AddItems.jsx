@@ -20,7 +20,7 @@ class AddItems extends React.Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:9911/item/findAllItems")
+      .get("http://localhost:9900/items/findAllItems")
       // .then((res) => res.json())
       .then((result) => {
         console.log(result);
@@ -35,7 +35,7 @@ class AddItems extends React.Component {
     evenet.preventDefault();
     if (itemID === 0) {
       axios
-        .post("http://localhost:9911/item/addItem", {
+        .post("http://localhost:9911/items/addItem", {
           itemID: this.state.itemID,
           itemName: this.state.itemName,
           itemDescription: this.state.itemDescription,
