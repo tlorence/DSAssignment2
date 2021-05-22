@@ -56,25 +56,24 @@ class Login extends React.Component {
   //user login
   submitLogin = (e) => {
     e.preventDefault();
-    fetch("", {
+    fetch("http://localhost:9900/login/auth", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: this.state.Email,
-        password: this.state.Password,
+        email: "johnperera0223@gmail.com",
+        password: "123"
       }),
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res) {
-          localStorage.setItem("user", res.id);
+        console.log(JSON.parse(res));
 
-          this.props.history.push("/DashBoard");
-        } else {
-          // alert("Please Enter Correct Password");
-        }
+        // if (res) {
+        // } else {
+        //   alert("Please Enter Correct Password");
+        // }
       })
       .catch((err) => console.log(err));
   };
