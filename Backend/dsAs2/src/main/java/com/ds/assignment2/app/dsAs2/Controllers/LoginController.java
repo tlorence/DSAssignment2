@@ -1,7 +1,5 @@
 package com.ds.assignment2.app.dsAs2.Controllers;
 
-
-import com.ds.assignment2.app.dsAs2.AuthenticationDto.AuthDto;
 import com.ds.assignment2.app.dsAs2.Model.User;
 import com.ds.assignment2.app.dsAs2.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +14,6 @@ public class LoginController {
 
     @Autowired
     private UserRepository repository;
-
-
-    private AuthDto authObj;
 
     @PostMapping("/auth")
     public Object validate(@RequestBody User user) {
