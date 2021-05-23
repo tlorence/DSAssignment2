@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import "./AddItems.css";
-// import M from 'materialize-css' 
 // import 'materialize-css/dist/css/materialize.min.css';
 
 class AddItems extends React.Component {
@@ -55,7 +54,7 @@ class AddItems extends React.Component {
         });
     } else {
       axios
-        .put("http://localhost:8280/item/update", {
+        .put("http://localhost:8280/items/update", {
           itemID: this.state.itemID,
           itemName: this.state.itemName,
           itemDescription: this.state.itemDescription,
@@ -69,12 +68,12 @@ class AddItems extends React.Component {
     }
   }
   delete(itemID) {
-    axios.delete("http://localhost:8280/item/delete/" + itemID).then(() => {
+    axios.delete("http://localhost:8280/items/delete/" + itemID).then(() => {
       this.componentDidMount();
     });
   }
   edit(itemID) {
-    axios.get("http://localhost:8280/item/findAllItems/" + itemID).then((res) => {
+    axios.get("http://localhost:8280/items/findAllItems/" + itemID).then((res) => {
       this.setState({
         itemID: res.data.itemID,
         itemName: res.data.itemName,
