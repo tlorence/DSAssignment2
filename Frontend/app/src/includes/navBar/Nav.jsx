@@ -6,6 +6,7 @@ class Nav extends React.Component {
     items: [],
     filter: "",
   };
+  //get change filds 
   onChange = (event) => {
     this.setState(
       {
@@ -15,6 +16,7 @@ class Nav extends React.Component {
     );
   };
 
+  //get item data to search
   componentDidMount() {
     fetch("http://localhost:8280/items/findAllItems", {
       method: "GET",
@@ -25,6 +27,7 @@ class Nav extends React.Component {
       .then((res) => res.json())
       .then(
         (result) => {
+          //set get value to state
           this.setState({
             isLoaded: true,
             items: result,
@@ -41,13 +44,7 @@ class Nav extends React.Component {
 
   render() {
     {
-      // const { filter, data } = this.state;
-      // const lowercasedFilter = filter.toLowerCase();
-      // const filteredData = data.filter((item) => {
-      //   return Object.keys(item).some((key) =>
-      //     item[key].toLowerCase().includes(lowercasedFilter)
-      //   );
-      // });
+      
       return (
         <div className="container-fluid page">
           <div className="row">

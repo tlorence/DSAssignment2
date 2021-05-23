@@ -11,10 +11,12 @@ class Login extends React.Component {
     password: "",
     role: "",
   };
+  // Get target name and target value and set it to the state
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  // Register as a buyer or seller
   submitNew = (e) => {
     e.preventDefault();
     fetch("http://localhost:8280/user/addUser", {
@@ -22,6 +24,7 @@ class Login extends React.Component {
       headers: {
         "Content-Type": "application/json",
       },
+      // Make data stingify and send it to backend
       body: JSON.stringify({
         firstName: this.state.firstName,
         lastName: this.state.lastName,
@@ -31,6 +34,7 @@ class Login extends React.Component {
         userType: this.state.role,
       }),
     })
+    // make current field empty
       .then(
         this.setState({
           firstName: "",
@@ -53,6 +57,7 @@ class Login extends React.Component {
       headers: {
         "Content-Type": "application/json",
       },
+      // Make data stingify and send it to backend
       body: JSON.stringify({
         email: this.state.email,
         password: this.state.password,
@@ -61,14 +66,18 @@ class Login extends React.Component {
       .then((res) => res.json())
       .then((res) => {
         if (res) {
+          // Save user data to local storage
           localStorage.setItem("user", JSON.stringify(res));
+          // Redirect data to add items page
           if (res.role === "seller") {
             // console.log(res);
             window.location = "/addItems";
-          } else if (res.role === "buyer") {
+          } // Redirect buyer to store page
+          else if (res.role === "buyer") {
             // console.log(res);
             window.location = "/store";
           } else {
+            // If credentials are incorrect, display the error msg
             Swal.fire({
               icon: "error",
               title: "Incorrect email or password",

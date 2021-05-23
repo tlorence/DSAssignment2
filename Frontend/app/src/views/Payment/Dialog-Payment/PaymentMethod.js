@@ -16,9 +16,11 @@ export default class PaymentMethod extends Component {
     phone: "",
     nameOfCustomer: "",
   };
+  // Get target name and target value and set it to the state
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
+  // Call creditCard payment dummy service
   submitCardPayment = (e) => {
     e.preventDefault();
     fetch("http://localhost:8280/dummyService/creditCard", {
@@ -26,8 +28,10 @@ export default class PaymentMethod extends Component {
       headers: {
         "Content-Type": "application/json",
       },
+      // Send dumy json object
       body: JSON.stringify({}),
     })
+      // make current field empty
       .then(
         this.setState({
           nameOnCard: "",
@@ -39,13 +43,16 @@ export default class PaymentMethod extends Component {
           nameOfCustomer: "",
         })
       )
+      // Display successfully placed order
       .then(() => {
+        // Clear local storage cart
         localStorage.clear("cart");
         Swal.fire({
           icon: "success",
           title: "Your order was placed successfully!",
         }).then((result) => {
           if (result.isConfirmed) {
+            // Redirect to store page
             window.location = "/store";
           }
         });
@@ -54,6 +61,7 @@ export default class PaymentMethod extends Component {
       .catch((err) => console.log(err));
   };
 
+  // Call Mobile Bill payment dummy service
   submitViaPhone = (e) => {
     e.preventDefault();
     fetch("http://localhost:8280/dummyService/mobileBill", {
@@ -61,8 +69,10 @@ export default class PaymentMethod extends Component {
       headers: {
         "Content-Type": "application/json",
       },
+      // Send dumy json object
       body: JSON.stringify({}),
     })
+      // make current field empty
       .then(
         this.setState({
           nameOnCard: "",
@@ -74,13 +84,16 @@ export default class PaymentMethod extends Component {
           nameOfCustomer: "",
         })
       )
+      // Display successfully placed order
       .then(() => {
+        // Clear local storage cart
         localStorage.clear("cart");
         Swal.fire({
           icon: "success",
           title: "Your order was placed successfully!",
         }).then((result) => {
           if (result.isConfirmed) {
+            // Redirect to store page
             window.location = "/store";
           }
         });

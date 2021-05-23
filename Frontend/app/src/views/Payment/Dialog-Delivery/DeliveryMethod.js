@@ -14,9 +14,11 @@ export default class DeliveryMethod extends Component {
     state: "",
     zip: "",
   };
+  // Get target name and target value and set it to the state
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
+  // Call delivery dummy service
   deliveryMethod = (e) => {
     e.preventDefault();
     fetch("http://localhost:8280/dummyService/delivery", {
@@ -26,6 +28,7 @@ export default class DeliveryMethod extends Component {
       },
       body: JSON.stringify({}),
     })
+    // make fields empty
       .then(
         this.setState({
           fullName: "",

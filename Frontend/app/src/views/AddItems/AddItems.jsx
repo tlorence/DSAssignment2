@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import "./AddItems.css";
-// import 'materialize-css/dist/css/materialize.min.css';
 
 class AddItems extends React.Component {
   constructor(props) {
@@ -16,25 +15,26 @@ class AddItems extends React.Component {
       price: 0,
     };
   }
-
+// Get item details
   componentDidMount() {
     axios
       .get("http://localhost:8280/items/findAllItems")
-      // .then((res) => res.json())
       .then((result) => {
         console.log(result);
+        //  Set data to state
         this.setState({
           isLoaded: true,
           items: result.data,
         });
       });
-    // console.log(this.state.items);
-  }
+  } // Submit new item
   submit(evenet, itemID) {
     evenet.preventDefault();
+    // Check if item is existing or not
     if (itemID === 0) {
       axios
         .post("http://localhost:8280/items/addItem", {
+          //Send data to backend
           itemID: this.state.itemID,
           itemName: this.state.itemName,
           itemDescription: this.state.itemDescription,
@@ -42,7 +42,8 @@ class AddItems extends React.Component {
           sellerName: this.state.sellerName,
           price: this.state.price,
         })
-        .then(() => {
+        .then(() => {+
+          // Make current state empty
           this.setState({
             itemID: 0,
             itemName: "",
@@ -53,6 +54,7 @@ class AddItems extends React.Component {
           });
         });
     } else {
+      // Update exisiting item
       axios
         .put("http://localhost:8280/items/update", {
           itemID: this.state.itemID,
@@ -63,15 +65,25 @@ class AddItems extends React.Component {
           price: this.state.price,
         })
         .then(() => {
-          // this.componentDidMount();
+          // Make current state empty
+          this.setState({
+            itemID: 0,
+            itemName: "",
+            itemDescription: "",
+            itemCategory: "",
+            sellerName: "",
+            price: 0,
+          });
         });
     }
   }
+  // Delete existing item
   delete(itemID) {
     axios.delete("http://localhost:8280/items/delete/" + itemID).then(() => {
       this.componentDidMount();
     });
   }
+  // Get item data to text field
   edit(itemID) {
     axios.get("http://localhost:8280/items/findAllItems/" + itemID).then((res) => {
       this.setState({
@@ -85,6 +97,7 @@ class AddItems extends React.Component {
     });
   }
   render() {
+    // Set data to display in body
     const { isLoaded, items } = this.state;
     return (
       <div className="container-fluid">
