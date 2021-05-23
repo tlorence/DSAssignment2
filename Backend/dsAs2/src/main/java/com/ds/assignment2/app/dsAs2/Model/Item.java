@@ -19,4 +19,5 @@ public class Item {
     private String itemCategory;
     private String sellerName;
     private Float price;
+//    private Binary img;
 }

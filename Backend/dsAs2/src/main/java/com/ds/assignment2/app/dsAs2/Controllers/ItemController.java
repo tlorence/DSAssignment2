@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
+@RequestMapping("/items")
 public class ItemController {
     @Autowired
     private ItemRepository repository;
