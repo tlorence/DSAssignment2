@@ -1,10 +1,24 @@
-const signUpButton = document.getElementById("signUp");
-const signInButton = document.getElementById("signIn");
-const container = document.getElementById("container-login");
-signUpButton.addEventListener("click", () => {
-  container.classList.add("right-panel-active");
+const cardbtn = document.getElementById("CardPaymentBtn");
+const phonebtn = document.getElementById("PhonePaymentBtn");
+const cardDiv = document.getElementById("CardPayment");
+const phoneDiv = document.getElementById("PhonePayment");
+const addressCheckCard = document.getElementById("DifferentAddressCard");
+const addressDivCard = document.getElementById("ShippingAddressCard");
+const addressCheckPhone = document.getElementById("DifferentAddresPhone");
+const addressDivPhone = document.getElementById("ShippingAddressPhone");
+cardbtn.addEventListener("click", () => {
+  cardDiv.classList.remove("d-none");
+  phoneDiv.classList.add("d-none");
+});
+phonebtn.addEventListener("click", () => {
+  phoneDiv.classList.remove("d-none");
+  cardDiv.classList.add("d-none");
 });
 
-signInButton.addEventListener("click", () => {
-  container.classList.remove("right-panel-active");
+addressCheckCard.addEventListener("change", () => {
+  addressDivCard.classList.toggle("d-none");
+});
+
+addressCheckPhone.addEventListener("change", () => {
+  addressDivPhone.classList.toggle("d-none");
 });

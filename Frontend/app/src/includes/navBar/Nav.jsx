@@ -3,7 +3,7 @@ import "./nav.css";
 import { Link } from "react-router-dom";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faUser } from "@fortawesome/free-solid-svg-icons";
-// import { faCartPlus } from "@fortawesome/free-solid-svg-icons"
+// import { faCartPlus } from "@fortawesome/free-solid-svg-icons
 class Nav extends React.Component {
   render() {
     return (
@@ -48,18 +48,26 @@ class Nav extends React.Component {
           </div>
 
           <div className="col-sm searchbar" align="">
-            <form action="#" method="get">
-              <input
-                class="form-control"
-                type="text"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <input type="submit" hidden />
-            </form>
-            <h1>
-              <i class="bi bi-person-circle"></i>
-            </h1>
+            <div className="row">
+              <div className="col-lg-10">
+                <form action="#" method="get">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Search"
+                    aria-label="Search"
+                  />
+                  <input type="submit" hidden />
+                </form>
+              </div>
+              <div className="col-lg-2">
+                <Link to="/login">
+                  <h1>
+                    <i class="fas fa-sign-out-alt icon-log"></i>
+                  </h1>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
