@@ -1,0 +1,175 @@
+.PaymentBody,
+.DeliveryBody{
+  font-family: Arial;
+  font-size: 17px;
+  padding: 8px;
+  opacity: 85%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.rowPayment,
+.rowDelivery {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap; 
+  flex-wrap: wrap;
+  margin: 0 -16px;
+}
+
+.col-25 {
+  -ms-flex: 25%; 
+  flex: 25%;
+}
+
+.col-50 {
+  -ms-flex: 50%; 
+  flex: 50%;
+}
+
+.col-75 {
+  -ms-flex: 75%; 
+  flex: 75%;
+}
+
+.col-25,
+.col-50,
+.col-75 {
+  padding: 0 16px;
+}
+
+.containerPayment,
+.containerDelivery{
+  background-color: white;
+  padding: 5px 20px 15px 20px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+}
+
+.PaymentText,
+.DeliveryText {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.PaymentText:hover,
+.DeliveryText:hover {
+  border: 1px solid gray;
+}
+
+.labelPayment,
+.labelDelivery {
+  margin-bottom: 10px;
+  display: block;
+}
+
+.icon-container {
+  margin-bottom: 20px;
+  padding: 7px 0;
+  font-size: 24px;
+}
+
+.btnPlaceOrder {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  width: 30%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 22px;
+  margin-left: 35%;
+}
+
+.btnPlaceOrder:hover {
+  background-color: #4caf50;
+  color: white;
+  border: 1px solid gray;
+  font-weight: bold;
+}
+
+.display-none {
+  display: none;
+}
+
+a {
+  color: #2196f3;
+}
+
+span.price {
+  float: right;
+  color: grey;
+}
+
+@media (max-width: 800px) {
+  .row {
+    flex-direction: column-reverse;
+  }
+  .col-25 {
+    margin-bottom: 20px;
+  }
+}
+
+#visa {
+  color: navy;
+}
+
+#amex {
+  color: rgb(4, 126, 226);
+}
+
+#mastercard {
+  color: rgb(255, 70, 0);
+}
+
+#discover {
+  color: orange;
+}
+
+#PhonePaymentBtn {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  width: 20%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 22px;
+  margin-left: 20%;
+}
+
+#PhonePaymentBtn:hover {
+  background-color: #4caf50;
+  color: white;
+  border: 1px solid gray;
+  font-weight: bold;
+}
+
+#CardPaymentBtn {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  width: 20%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 22px;
+  margin-left: 20%;
+}
+
+#CardPaymentBtn:hover {
+  background-color: #4caf50;
+  color: white;
+  border: 1px solid gray;
+  font-weight: bold;
+}

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./items.css";
-import img from "./login.jpg";
+import img from "./soap.jpg";
 import Swal from "sweetalert2";
 
 export default class Items extends Component {
@@ -58,7 +58,7 @@ export default class Items extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:9900/items/findAllItems", {
+    fetch("http://localhost:8280/items/findAllItems", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -205,24 +205,22 @@ export default class Items extends Component {
                     <button
                       onClick={() =>
                         Swal.fire({
-                          title: "Do you want to deliver products ?",
+                          title: "Delivery options!",
                           width: 600,
-                          height: 600,
                           padding: "3em",
                           showDenyButton: true,
                           showCancelButton: true,
 
-                          confirmButtonText: `Deliver`,
-                          denyButtonText: `Don't Deliver`,
+                          confirmButtonText: `Home Delivery`,
+                          denyButtonText: `Self Pickup`,
                         }).then((result) => {
                           /* Read more about isConfirmed, isDenied below */
                           if (result.isConfirmed) {
-                            // const shippingPrice = itemsPrice > 2000 ? 0 : 150;
-                            //  totalPrice =await (itemsPrice + shippingPrice);
-                            // console.log(totalPrice);
-                            window.location = "/";
+                            
+                            window.location = "/deliverymethod";
                           } else if (result.isDenied) {
-                            Swal.fire("Changes are not saved", "", "info");
+                            window.location = "/paymentmethod";
+
                           }
                         })
                       }

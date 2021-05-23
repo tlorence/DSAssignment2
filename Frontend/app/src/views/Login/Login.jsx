@@ -3,17 +3,6 @@ import "./login.css";
 import Swal from "sweetalert2";
 
 class Login extends React.Component {
-  // constructor(props){
-  //   super(props);
-  //   this.state={
-  //     error : null,
-  //     isLoaded:false,
-  //     user : [],
-
-  //   };
-  // }
-
-  //user registration
   state = {
     firstName: "",
     lastName: "",
@@ -28,7 +17,7 @@ class Login extends React.Component {
 
   submitNew = (e) => {
     e.preventDefault();
-    fetch("http://localhost:9900/user/addUser", {
+    fetch("http://localhost:8280/user/addUser", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +48,7 @@ class Login extends React.Component {
   //user login
   submitLogin = (e) => {
     e.preventDefault();
-    fetch("http://localhost:9900/login/auth", {
+    fetch("http://localhost:8280/login/auth", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -72,7 +61,6 @@ class Login extends React.Component {
       .then((res) => res.json())
       .then((res) => {
         if (res) {
-          
           localStorage.setItem("user", JSON.stringify(res));
           if (res.role === "seller") {
             // console.log(res);
